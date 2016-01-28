@@ -1,0 +1,3 @@
+QUESTIONS
+
+- difference between global expect and supertest expect

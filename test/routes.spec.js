@@ -11,7 +11,7 @@ describe('http requests', function(){
 			title: '1601',
 			content: '1601 is great',
 			tags: ['todayisthursday', 'gracehopper', 'werethebest'],
-			urlTitle: 'iamfake'
+			// urlTitle: 'iamfake'
 		})
 		.then(function(page){
 			myPage = page;
@@ -66,7 +66,7 @@ describe('http requests', function(){
         	agent.get('/wiki/cats').expect(404, done);
         });
         it('gets 200 on page that does exist', function(done) {
-        	agent.get('/iamfake').expect(200, done);
+        	agent.get('/wiki/1601').expect(200, done);
         });
     });
 
@@ -77,18 +77,55 @@ describe('http requests', function(){
     });
 
     describe('GET /wiki/:urlTitle/similar', function() {
-        xit('gets 404 for page that doesn\'t exist', function() {});
-        xit('gets 200 for similar page', function() {});
+        it('gets 404 for page that doesn\'t exist', function(done) {
+        	agent.get('/wiki/cats/similar').expect(404, done);
+        });
+
+        it('gets 200 for similar page', function(done) {
+        	agent.get('/wiki/1601/similar').expect(200, done);
+        });
     });
 
-
+// ??? WHY BOTH /ADD AND WIKI/ADD?
     describe('GET /wiki/add', function() {
-        xit('gets 200', function() {});
+        it('gets 200', function(done) {
+        	agent.get('/wiki/add').expect(200, done);
+        });
     });
 
 
-    describe('POST /wiki/add', function() {
-        xit('creates a page in db', function() {});
+    describe('POST /wiki', function() {
+        it('creates a page in db', function(done) {
+        	return agent.post('/wiki')
+        	.send({title: 'specialTitle', content: 'special content', name: 'Emma', email: 'e@gmail.com', tags: ['tag1', 'tag2'] })
+        	.expect(302)
+        	.then(function() {
+				return Page.find({title: 'specialTitle'})
+        	})
+        	.then(function(query) {
+	        	console.log(query);
+	        	expect(query.content).to.equal('special content');
+	        	//done();
+	        })
+	        //.then(null, done)
+
+
+   
+         });
     });
 
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+

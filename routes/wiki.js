@@ -28,13 +28,15 @@ router.post('/', function (req, res, next) {
             title: req.body.title,
             content: req.body.content,
             status: req.body.status,
-            tags: req.body.tags.split(','),
+            tags: req.body.tags,
             author: user._id
         });
 
         return newPage.save();
 
     }).then(function (page) {
+       // console.log("this is page from routes: ", page)
+        //res.status(201).json(page)
         res.redirect(page.route);
     }).then(null, next);
 
