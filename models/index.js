@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var marked = require('marked');
 
+
 if(process.env.npm_lifecycle_event == 'test'){
     mongoose.connect('mongodb://localhost/wikistack_test');
 }else{

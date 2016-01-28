@@ -23,7 +23,29 @@ describe('Page model', function(){
 		});
 
 	});
-	it('page should have title', function(){
-		expect(myPage.title).to.equal('1601');
-	})
+	
+	describe('validations', function(){
+		it('exptect title to be required', function(done){
+			emptyPage.validate(function(err){
+				expect(err.errors).to.have.property('title');
+				done();
+			})
+		});
+		
+		it('expect content to be required', function(done){
+			emptyPage.validate(function(err){
+				expect(err.errors).to.have.property('content');
+				done();
+			})
+		});
+		// don't test urlTitle because the pre-validation in models creates one
+	});
+
+    describe('Statics', function() {
+        describe('findByTag', function() {
+            xit('gets pages with the search tag', function() {});
+            xit('does not get pages without the search tag', function() {});
+        });
+    });
+
 })

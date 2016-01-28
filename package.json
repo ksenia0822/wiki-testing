@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon -e html,js,css ./server.js",
-    "test": "mocha"
+    "test": "NODE_ENV=testing mocha"
   },
   "keywords": [],
   "author": "",
