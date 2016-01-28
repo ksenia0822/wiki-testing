@@ -1,5 +1,5 @@
 var chai = require('chai');
-chai.should();
+should = chai.should();
 expect = chai.expect;
 
 
@@ -111,5 +111,12 @@ describe('Page model', function(){
     	})
     })
 
+    describe('Hooks', function(){
+    	it('page with no pre-set urlTitle is validate after urlTitle is created', function(){
+    		should.not.exist(emptyPage.urlTitle);
+    		should.exist(noSharedTagPage.urlTitle);
+    		expect(noSharedTagPage.route).to.equal('/wiki/' + noSharedTagPage.urlTitle);
+    	})
+    })
 
 })

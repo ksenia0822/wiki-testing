@@ -42,7 +42,8 @@ router.post('/', function (req, res, next) {
 
 // /wiki/add
 router.get('/add', function (req, res) {
-    res.render('addpage');
+    // res.render('addpage');
+    res.json({})
 });
 
 router.get('/search', function (req, res, next) {
