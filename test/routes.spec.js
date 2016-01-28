@@ -96,21 +96,19 @@ describe('http requests', function(){
 
     describe('POST /wiki', function() {
         it('creates a page in db', function(done) {
-        	return agent.post('/wiki')
+        	agent.post('/wiki')
         	.send({title: 'specialTitle', content: 'special content', name: 'Emma', email: 'e@gmail.com', tags: ['tag1', 'tag2'] })
         	.expect(302)
-        	.then(function() {
-				return Page.find({title: 'specialTitle'})
+        	.end(function() {
+                console.log('line 103');
+				 Page.findOne({title: 'specialTitle'})
+                .then(function(page){
+                    console.log(page);
+                    expect(page.content).to.equal('special content');
+                    done();
+                })
+                .then(null, done)
         	})
-        	.then(function(query) {
-	        	console.log(query);
-	        	expect(query.content).to.equal('special content');
-	        	//done();
-	        })
-	        //.then(null, done)
-
-
-   
          });
     });
 
